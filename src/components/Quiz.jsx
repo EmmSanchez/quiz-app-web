@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react"
-import { TimerIcon } from "../assets/icons/timerIcon"
+import { TimerIcon } from "../assets/icons/TimerIcon"
 import data from "../data/data.json"
 
 // QUIZ -------------------------------------------------------------------------
