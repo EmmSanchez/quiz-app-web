@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { Quiz } from "./Quiz"
-import { Login } from "./login"
+import { Login } from "./Login"
 
 export function AppContainer() {
   const [user, setUser] = useState('')
