@@ -7,8 +7,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: auto;
-  background-size: cover;
   user-select: none;
 }
 
@@ -22,7 +20,8 @@ body {
 .title {
   font-size: 4rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 .user_form {
@@ -205,4 +204,20 @@ body {
   margin-top: 2rem;
   font-size: 1.5rem;
   cursor: pointer;
+}
+.gradient-bg {
+  background: linear-gradient(
+    to right,
+    #74deee,
+    #239eab,
+    #35518a,
+    #74deee,
+    #239eab,
+    #35518a
+  );
+  background-size: 300% 300%;
+}
+.pointer-events-allowed {
+  background-color: #f3722c;
+  pointer-events: fill;
 }
