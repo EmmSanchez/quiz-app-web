@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Quiz } from "./Quiz"
 import { Login } from "./Login"
 import { NavBar } from "./NavBar"
+import { Footer } from "./Footer"
 
 export function AppContainer() {
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -12,12 +13,12 @@ export function AppContainer() {
   }
 
   return (
-    <>
-      <NavBar className="bg-amber-400"/>
-      
+    <div className="flex flex-col justify-center items-center min-h-screen">
+      <NavBar />
       {isSubmitted ? <Quiz setIsSubmitted={setIsSubmitted}/> : <Login handleSubmit={handleSubmit}/>}
+      <Footer />
 
-      <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_55%,#003566_100%)]"></div>
-    </>
+      <div className="fixed inset-0 -z-10 h-full w-dvw items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_55%,#003566_100%)]"></div>
+    </div>
   )
 }

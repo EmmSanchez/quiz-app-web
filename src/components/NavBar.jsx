@@ -3,13 +3,13 @@ import { AwardIcon, GitHubIcon, HomeIcon  } from "../assets/icons/Icons"
 export function NavBar() {
   return (
     <>
-      <nav className="w-dvw flex justify-center">
+      <nav className="w-full flex justify-center">
         <div className="w-full max-w-7xl">
-          <div className="flex flex-row justify-between items-center p-3">
-            <a href="https://quiz-app-web-plum.vercel.app/" target="_blank" className="flex items-end gap-2 text-2xl font-semibold transition hover:cursor-pointer hover:opacity-85">
+          <div className="flex flex-row justify-between items-center max-sm:justify-around p-3">
+            <a href="/" className="flex items-end gap-2 text-2xl font-semibold transition hover:cursor-pointer hover:opacity-85">
               <AwardIcon className="bg-gradient-to-bl from-neutral-800 to-neutral-950 rounded-md p-1 size-8"/>
               Quode
-                <span className="text-lg text-zinc-500 font-medium">
+                <span className="max-md:hidden text-lg text-zinc-500 font-medium">
                   Test, Learn, Code!
                 </span>
             </a>

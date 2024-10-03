@@ -7,9 +7,8 @@ export function DropdownMenu({
   title, 
   id, 
   activeDropdown, 
-  setActiveDropdown,  
+  setActiveDropdown,
   setSelectedSettings, 
-  // dropdownRef
 }) {
 
   const dropdownRef = useRef()
@@ -61,7 +60,7 @@ export function DropdownMenu({
       document.removeEventListener("click", handleClickOutside);
     }
   }, [activeDropdown])
-  
+
   return (
     <>
       <div className="flex flex-col">
@@ -70,7 +69,7 @@ export function DropdownMenu({
           className={`flex justify-center items-center gap-2 w-48 border-solid border-[1px] border-zinc-700 px-4 py-2 rounded-md transition-all ease-out hover:bg-zinc-700 ${activeDropdown === id ? 'pointer-events-none' : 'pointer-events-auto'}`}
         >
           {children}
-          <p>{title}</p>
+          <p className="font-medium">{title}</p>
         </button>
 
         <div ref={dropdownRef} className={`${activeDropdown === id ? 'modal-opened' : 'modal-hidden'}`}>
@@ -81,8 +80,8 @@ export function DropdownMenu({
             {
               options && options.map((option, index) => {
                 return (
-                  <li key={index} onClick={(e) => handleSelectOption(e, option, id)} className="px-4 py-1 rounded-sm transition hover:bg-zinc-800 hover:cursor-pointer">
-                    <p>{option}</p>
+                  <li key={index} onClick={(e) => handleSelectOption(e, option, id)} className={`px-4 py-1 rounded-sm transition hover:bg-zinc-800 hover:cursor-pointer ${option === title ? 'bg-amber-300 text-zinc-950 hover:text-white' : ''}`}>
+                    <p className="font-medium">{option}</p>
                   </li>
                 )
               })

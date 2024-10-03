@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BrainIcon, ClipboardListIcon, CodeIcon, PlayIcon } from "../assets/icons/Icons"
 import { DropdownMenu } from "./Dropdown"
 
@@ -13,28 +13,34 @@ export function Login ({ handleSubmit }) {
       secondsPerQuestion: "60"
     }
   )
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false)
 
   const dropdownOptions1 = ["JavaScript", "Python", "Rust"];
   const dropdownOptions2 = ["Easy", "Medium", "Hard"];
   const dropdownOptions3 = ["5 Questions", "10 Questions", "15 Questions", "20 Questions"];
 
+  useEffect(() => {
+    if (!activeDropdown) return setIsButtonDisabled(false)
+
+    setIsButtonDisabled(true)
+  }, [activeDropdown])
+
   return (
     <>
-      <header className="flex flex-col justify-center items-center max-w-4xl py-8">
-        <h1 className="title text-center">Test Your <span className="text-amber-300 font-bold">Code Knowledge</span></h1>
-        <p className="max-w-2xl text-center text-lg">
+      <header className="flex flex-col flex-grow justify-start items-center max-w-4xl sm:py-14">
+        <h1 className="mt-6 sm:mt-8 mb-4 text-[30px] sm:text-[48px] lg:text-[64px] px-4 font-bold text-center">Test Your <span className="text-amber-300 font-bold">Code Knowledge</span></h1>
+        <p className="max-w-2xl text-center text-pretty text-lg max-sm:text-sm max-md:px-6">
           Challenge yourself with quizzes designed to test your coding knowledge across languages and frameworks.
         </p>
 
-        <section className="flex flex-col items-center w-auto mt-12 gap-4">
-          <div className="flex flex-wrap w-full justify-center gap-4">
+        <section className="flex flex-col items-center w-auto mt-6 sm:mt-12 gap-4 max-md:px-4">
+          <div className="flex z-10 flex-wrap w-full justify-center gap-4">
             <DropdownMenu 
               options={dropdownOptions1} 
               title={selectedSettings.topic} 
               id="1" 
               activeDropdown={activeDropdown}
               setActiveDropdown={setActiveDropdown} 
-              selectedSettings={selectedSettings} 
               setSelectedSettings={setSelectedSettings}
             >
               <CodeIcon className="size-5"/>
@@ -45,7 +51,6 @@ export function Login ({ handleSubmit }) {
               id="2" 
               activeDropdown={activeDropdown} 
               setActiveDropdown={setActiveDropdown} 
-              selectedSettings={selectedSettings} 
               setSelectedSettings={setSelectedSettings}
             >
               <BrainIcon className="size-5"/>
@@ -56,17 +61,22 @@ export function Login ({ handleSubmit }) {
               id="3" 
               activeDropdown={activeDropdown} 
               setActiveDropdown={setActiveDropdown} 
-              selectedSettings={selectedSettings} 
               setSelectedSettings={setSelectedSettings}
             >
               <ClipboardListIcon className="size-5"/>
             </DropdownMenu>
           </div>
 
-          <button onClick={handleSubmit} className="flex justify-center items-center w-full mt-4 py-3 gap-3 bg-amber-300 text-zinc-900 text-xl font-bold rounded-md transition hover:bg-[#B09437]">
-            <PlayIcon />
-            Start Quiz
-          </button>
+          <div className="flex w-[95%] mt-4 ml-3 shadow-[-8px_8px_#fcd34d] rounded-md">
+            <button 
+              disabled={isButtonDisabled} 
+              onClick={handleSubmit} 
+              className={`flex z-0 justify-center items-center w-full py-3 gap-3 bg-[#ffff3f] text-zinc-900 text-xl font-bold rounded-md transition ease-out border-solid border-2 border-zinc-900 ${isButtonDisabled ? 'pointer-events-none' : 'hover:-translate-x-2 hover:translate-y-2'}`}
+            >
+              <PlayIcon />
+              Start Quiz
+            </button>
+          </div>
         </section>
       </header>
     </>
