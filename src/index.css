@@ -205,19 +205,18 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
-.gradient-bg {
-  background: linear-gradient(
-    to right,
-    #74deee,
-    #239eab,
-    #35518a,
-    #74deee,
-    #239eab,
-    #35518a
-  );
-  background-size: 300% 300%;
+
+.modal-opened {
+  display: block;
+  scale: 1;
+  transition: scale 0.1s ease-in-out;
+
+  @starting-style {
+    scale: 0.9;
+  }
 }
-.pointer-events-allowed {
-  background-color: #f3722c;
-  pointer-events: fill;
+.modal-hidden {
+  transition: scale 0.05s ease, display 0.05s ease-in-out allow-discrete;
+  scale: 0.9;
+  display: none;
 }
