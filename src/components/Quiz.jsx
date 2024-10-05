@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect, useRef } from "react"
-import { TimerIcon } from "../assets/icons/TimerIcon"
-import data from "../data/data.json"
+import { CheckCircle, CircleX, TimerIcon } from "../assets/icons/Icons"
+import { ProgressBar } from "./ProgressBar"
+import { Prism as SyntaxHighlighter} from "react-syntax-highlighter"
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
-// QUIZ -------------------------------------------------------------------------
-// eslint-disable-next-line react/prop-types
-export function Quiz({user, setIsSubmitted}) {
+export function Quiz({user, setIsSubmitted, selectedSettings, filteredQuestions, handleSubmit}) {
   const [iterator, setIterator] = useState(0)
   const [rightCounter, setRightCounter] = useState(0)
   const [wrongCounter, setWrongCounter] = useState(0)
@@ -14,87 +15,11 @@ export function Quiz({user, setIsSubmitted}) {
   const [timeLeft, setTimeLeft] = useState(0)
   const timerId = useRef()
 
-  const [indexList, setIndexList] = useState([])
-  const [filteredQuestions, setFilteredQuestions] = useState(data)
-
   const [isFinished, setIsFinished] = useState(false)
   // eslint-disable-next-line no-unused-vars
   const [isRestarted, setIsRestarted] = useState(false)
 
-  // GENERADOR DE NUMEROS ALEATORIOS -------------------------------------------------------------------
-  const randomNumberBetween = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-  
-  const generateUniqueRandomNumbers = (min, max, count) => {
-    const uniqueNumbers = new Set();
-    while (uniqueNumbers.size < count) {
-      uniqueNumbers.add(randomNumberBetween(min, max));
-    }
-    return Array.from(uniqueNumbers);
-  }
-  
-  
-  // GUARDAR PREGUNTAS FILTRADAS -----------------------------------------------------------------------
-  
-  // FILTRADO FUNCION
-  // function filtrarPorIndice(questions, indexList) {
-  //   let filtrado = [];
-  //   indexList.forEach((value) => {
-  //     questions.forEach((question, i) => {
-  //       if (value === i) {
-  //         filtrado.push(question);
-  //       }
-  //     });
-  //   });
-  //   return filtrado;
-  // }
-
-  // FUNCIÓN DE GENERAR 3M Y 3O
-  function obtenerPreguntasAleatorias(preguntas) {
-    // Filtrar preguntas por tipo
-    const preguntasM = preguntas.filter(pregunta => pregunta.tipo === 'M');
-    const preguntasO = preguntas.filter(pregunta => pregunta.tipo === 'O');
-    
-    // Función para obtener índices aleatorios sin repetición
-    function obtenerIndicesAleatorios(n, max) {
-        const indices = [];
-        while (indices.length < n) {
-            const indice = Math.floor(Math.random() * max);
-            if (!indices.includes(indice)) {
-                indices.push(indice);
-            }
-        }
-        return indices;
-    }
-    
-    // Obtener índices aleatorios sin repetición para cada tipo
-    const indicesM = obtenerIndicesAleatorios(3, preguntasM.length);
-    const indicesO = obtenerIndicesAleatorios(3, preguntasO.length);
-    
-    // Obtener preguntas aleatorias
-    const preguntasAleatorias = [];
-    indicesM.forEach(indice => preguntasAleatorias.push(preguntasM[indice]));
-    indicesO.forEach(indice => preguntasAleatorias.push(preguntasO[indice]));
-    
-    return preguntasAleatorias;
-  }
-  
-
-  // GENERAR INDEX LIST ---------------------------------------------------------------------------------
-  useEffect(() => {
-    const uniqueNumbers = generateUniqueRandomNumbers(0, data.length - 1, 6);
-    setIndexList(uniqueNumbers);
-  }, []);
-  
-  // FILTRADO -----------------------------------------------------------------------------
-  useEffect(() => {
-    if (indexList.length === 6) {
-      const newFilteredQuestions = obtenerPreguntasAleatorias(data);
-      setFilteredQuestions(newFilteredQuestions);
-    }
-  }, [indexList]);
-
+  const codeString = "const fruits = ['apple', 'banana'];\nfruits.push('orange')\nfruits.push('orange')\nfruits.push('orange')\nfruits.push('orange')\nfruits.push('orange')"
 
   // TIMER --------------------------------------------------------------------------
   useEffect(() => {
@@ -159,8 +84,7 @@ export function Quiz({user, setIsSubmitted}) {
 
 
   // Restart
-  const handleRestart = (e) => {
-    e.preventDefault()
+  const handleRestart = () => {
     setIterator(0);
     setRightCounter(0);
     setWrongCounter(0);
@@ -170,11 +94,8 @@ export function Quiz({user, setIsSubmitted}) {
     setIsFinished(false);
     setTimeLeft(0)
 
-
     setIsRestarted(true)
-
-    const uniqueNumbers = generateUniqueRandomNumbers(0, data.length - 1, 6);
-    setIndexList(uniqueNumbers);
+    handleSubmit()
   }
 
   // Return to Login
@@ -185,8 +106,17 @@ export function Quiz({user, setIsSubmitted}) {
   
 
   return (
-    <div className='flex flex-col justify-center items-center w-[500px] h-[600px] px-6 py-8 text-black bg-white rounded-lg'>
-      <h1 className='text-5xl font-bold mb-4'>MN Quiz</h1>
+    <div className='flex flex-col flex-grow justify-start items-center w-[1280px] mt-1 px-2 py-6 text-white'>
+      <div className="flex flex-col w-full mb-7 gap-4 px-6">
+        <h2 className='text-5xl text-center font-bold'>{selectedSettings.topic} <span className="text-5xl font-extrabold text-sky-400">Quiz</span></h2>
+        <div className="flex w-fit rounded-full px-8 py-1 border-solid border-[1px] border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950">
+          <p className="font-medium text-zinc-300">Difficult {selectedSettings.difficult}</p>
+        </div>
+      </div>
+
+      {/* Progress Bar */}
+      <ProgressBar answeredQuestions={iterator} totalQuestions={selectedSettings.questions}/>
+
       {
         isFinished ? 
         (
@@ -220,17 +150,48 @@ export function Quiz({user, setIsSubmitted}) {
         )
         :
         (
-          <>
-            <div className="flex w-full justify-between items-center pb-2">
-              <p>{iterator + 1}/6</p>
-              <div className="flex items-center gap-2 bg-zinc-200 px-4 py-2 rounded-full">
-                <TimerIcon/>
-                <p>{formatTime(countdown)}</p>  
+          <div className="flex flex-row justify-center w-full h-full px-6 py-4 gap-10">
+
+            {/* left column */}
+            <div className="flex flex-col flex-1">
+              <div className="flex w-full justify-between items-center mb-4">
+                <p className="text-lg font-bold text-[#ffff3f]">Question {iterator + 1}/{selectedSettings.questions}</p>
+                <div className="flex items-center gap-2 rounded-full">
+                  <TimerIcon className="text-zinc-300"/>
+                  <p className="text-lg font-medium tracking-wider text-zinc-300">{formatTime(countdown)}</p>  
+                </div>
+              </div>
+
+              <div className="flex flex-grow flex-col gap-4 rounded-md">
+                <p className="text-lg font-medium pr-1 text-zinc-100">{filteredQuestions[iterator].pregunta}</p>
+
+                {/* CODE */}
+                {
+                  !filteredQuestions[iterator].code && (
+                    <div className="flex-grow overflow-auto max-h-40 max-w-full">
+                      <SyntaxHighlighter language="javascript" style={dracula} customStyle={{margin: 0, height: "100%",}} className="text-xs">
+                        {codeString}
+                      </SyntaxHighlighter>
+                    </div>
+                  )
+                }
+              </div>
+
+              <div className="flex flex-row justify-between pt-2">
+                <div className="flex items-center gap-3">
+                  <CheckCircle className="size-6 text-green-500"/>
+                  <p className='font-bold text-green-500'>{rightCounter}</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CircleX className="size-6 text-red-500"/>
+                  <p className='font-bold text-red-500'>{wrongCounter}</p>
+                </div>
               </div>
             </div>
-            <div className="w-full py-4 border-t-[1px] border-gray-500">
-              <p className="text-base font-bold">{filteredQuestions[iterator].pregunta}</p>
-              <div className="flex flex-col py-4 gap-2">
+
+            {/* right column */}
+            <div className="flex flex-col flex-1 w-full gap-4">
+              <div className="flex flex-col gap-4">
                 {
                   filteredQuestions[iterator].respuestas.map((res, index) => {
                     return (
@@ -247,15 +208,21 @@ export function Quiz({user, setIsSubmitted}) {
                   })
                 }
               </div>
-            </div>
-            <div className="flex w-full justify-between items-center pb-2">
-              <div className="quiz_result">
-                <p className='font-bold'>✅ {rightCounter}</p>
-                <p className='font-bold'>❌ {wrongCounter}</p>
+              <div className="flex w-full justify-between items-center">
+                <button disabled={isNotChecked} className={`next-button ${isNotChecked ? "disabled": ""}`} onClick={() => handleNextQuestion()}>
+                  {(iterator + 1) === selectedSettings.questions ?
+                    <p className="text-xl text-zinc-900 font-bold">
+                      Finish
+                    </p>
+                    :
+                    <p className="text-xl text-zinc-900 font-bold">
+                      Next Question
+                    </p>
+                  }
+                </button>
               </div>
-              <button disabled={isNotChecked} className={`next-button ${isNotChecked ? "disabled": ""}`} onClick={() => handleNextQuestion()}>Siguiente</button>
             </div>
-          </>
+          </div>
         )
       }
     </div>
