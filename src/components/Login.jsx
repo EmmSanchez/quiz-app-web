@@ -1,23 +1,16 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"
 import { BrainIcon, ClipboardListIcon, CodeIcon, PlayIcon } from "../assets/icons/Icons"
 import { DropdownMenu } from "./Dropdown"
 
-// eslint-disable-next-line react/prop-types
-export function Login ({ handleSubmit }) {
+export function Login ({ handleSubmit, selectedSettings, setSelectedSettings }) {
   const [activeDropdown, setActiveDropdown] = useState(null)
-  const [selectedSettings, setSelectedSettings] = useState(
-    {
-      topic: "JavaScript",
-      difficult: "Easy",
-      questions: "10 Questions",
-      secondsPerQuestion: "60"
-    }
-  )
+
   const [isButtonDisabled, setIsButtonDisabled] = useState(false)
 
   const dropdownOptions1 = ["JavaScript", "Python", "Rust"];
   const dropdownOptions2 = ["Easy", "Medium", "Hard"];
-  const dropdownOptions3 = ["5 Questions", "10 Questions", "15 Questions", "20 Questions"];
+  const dropdownOptions3 = [5, 10, 15, 20];
 
   useEffect(() => {
     if (!activeDropdown) return setIsButtonDisabled(false)
