@@ -1,4 +1,4 @@
-@import "./App.css";
+@import './App.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -92,7 +92,9 @@
   }
 }
 .modal-hidden {
-  transition: scale 0.05s ease, display 0.05s ease-in-out allow-discrete;
+  transition:
+    scale 0.05s ease,
+    display 0.05s ease-in-out allow-discrete;
   scale: 0.9;
   display: none;
 }
