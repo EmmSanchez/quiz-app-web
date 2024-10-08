@@ -21,23 +21,23 @@ export function Question({
 
   return (
     <>
-      <div className="flex flex-row justify-center w-full h-full px-6 py-4 gap-10">
+      <div className="flex max-md:flex-col flex-row justify-center w-full h-full px-6 md:py-4 gap-4 md:gap-10">
         {/* left column */}
         <div className="flex flex-col flex-1">
           <div className="flex w-full justify-between items-center mb-4">
-            <p className="text-lg font-bold text-[#ffff3f]">
+            <p className="max-md:text-sm text-lg font-bold text-[#ffff3f]">
               Question {iterator + 1}/{selectedSettings.questions}
             </p>
             <div className="flex items-center gap-2 rounded-full">
-              <TimerIcon className="text-zinc-300" />
-              <p className="text-lg font-medium tracking-wider text-zinc-300">
+              <TimerIcon className="max-md:size-4 text-zinc-300" />
+              <p className="max-md:text-sm text-lg font-medium tracking-wider text-zinc-300">
                 {formatTime(countdown)}
               </p>
             </div>
           </div>
 
           <div className="flex flex-grow flex-col gap-4 rounded-md">
-            <p className="text-lg font-medium pr-1 text-zinc-100">
+            <p className="max-md:text-sm text-lg font-medium pr-1 text-zinc-100">
               {filteredQuestions[iterator].pregunta}
             </p>
 
@@ -48,7 +48,7 @@ export function Question({
                   language="javascript"
                   style={dracula}
                   customStyle={{ margin: 0, height: '100%' }}
-                  className="text-xs"
+                  className="max-md:text-[10px] text-xs"
                 >
                   {codeString}
                 </SyntaxHighlighter>
@@ -58,19 +58,19 @@ export function Question({
 
           <div className="flex flex-row justify-between pt-2">
             <div className="flex items-center gap-3">
-              <CheckCircle className="size-6 text-green-500" />
+              <CheckCircle className="max-md:size-5 size-6 text-green-500" />
               <p className="font-bold text-green-500">{rightCounter}</p>
             </div>
             <div className="flex items-center gap-3">
-              <CircleX className="size-6 text-red-500" />
+              <CircleX className="max-md:size-5 size-6 text-red-500" />
               <p className="font-bold text-red-500">{wrongCounter}</p>
             </div>
           </div>
         </div>
 
         {/* right column */}
-        <div className="flex flex-col flex-1 w-full gap-4">
-          <div className="flex flex-col gap-4">
+        <div className="flex flex-col flex-1 w-full max-md:gap-3 gap-4">
+          <div className="flex flex-col max-md:gap-2 gap-4">
             {filteredQuestions[iterator].respuestas.map((res, index) => {
               return (
                 <div key={index}>

@@ -21,7 +21,7 @@ export function ProgressBar({ answeredQuestions, totalQuestions, isFinished }) {
   const questionsArray = createArrayUpTo(totalQuestions);
 
   return (
-    <div className="relative w-full px-6 mb-6">
+    <div className="relative w-full px-6 mb-6 max-md:hidden">
       <div className="relative w-full h-2 rounded-full bg-zinc-900">
         <div
           style={{ width: `${progress}%` }}

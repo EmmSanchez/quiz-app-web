@@ -4,14 +4,14 @@
 @tailwind utilities;
 
 .choice {
-  @apply w-full text-left px-5 py-3 rounded-xl border-[1px] border-[#80808066] transition ease-out hover:cursor-pointer;
+  @apply w-full max-md:text-sm text-base text-left max-md:py-2 px-5 py-3 rounded-xl border-[1px] border-[#80808066] transition ease-out hover:cursor-pointer;
 }
 
 .choice:hover:not(.choice-disabled) {
   background-color: rgba(128, 128, 128, 0.4);
 }
 .next-button {
-  @apply w-full bg-[#ffff3f] px-8 py-4 rounded-xl transition-all;
+  @apply w-full bg-[#ffff3f] max-md:py-3 px-8 py-4 rounded-xl transition-all;
 }
 .right_answer {
   background-color: #43aa8b;

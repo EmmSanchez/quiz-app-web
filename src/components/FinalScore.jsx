@@ -14,17 +14,17 @@ export function FinalScore({
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-full px-6 py-2">
-      <div className="flex flex-row items-center gap-14">
+      <div className="flex max-md:flex-col-reverse flex-row items-center max-md:gap-2 mt-0 md:gap-14">
         <div className="flex flex-1 flex-col justify-center items-center gap-4">
           <h2 className="text-2xl font-bold">Final Score</h2>
 
           <div className="flex flex-col flex-wrap w-full gap-2">
-            <div className="flex gap-2">
-              <section className="flex-1 px-4 py-2 w-[200px] rounded-lg bg-zinc-900 border-solid border-[1px] border-zinc-800">
+            <div className="flex flex-wrap gap-2">
+              <section className="flex-1 px-4 py-2 max-[470px]:w-full w-[200px] rounded-lg bg-zinc-900 border-solid border-[1px] border-zinc-800">
                 <p className="text-2xl font-bold">{rightCounter}</p>
                 <p className="font-light whitespace-nowrap">Correct Answers</p>
               </section>
-              <section className="flex-1 px-4 py-2 w-[200px] rounded-lg bg-zinc-900 border-solid border-[1px] border-zinc-800">
+              <section className="flex-1 px-4 py-2 max-[470px]:w-full w-[200px] rounded-lg bg-zinc-900 border-solid border-[1px] border-zinc-800">
                 <p className="text-2xl font-bold">{wrongCounter}</p>
                 <p className="font-light whitespace-nowrap">
                   Incorrect Answers

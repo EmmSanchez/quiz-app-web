@@ -99,14 +99,14 @@ export function Quiz({
   };
 
   return (
-    <div className="flex flex-col flex-grow justify-start items-center w-[1280px] mt-1 px-2 py-6 text-white">
-      <div className="flex flex-col w-full mb-7 gap-4 px-6">
+    <div className="flex flex-col flex-grow justify-start items-center w-full min-[1280px]:w-[1280px] mt-1 px-2 max-md:py-2 py-6 text-white">
+      <div className="flex flex-col w-full mb-4 md:mb-7 gap-4 px-6">
         <h2 className="text-5xl text-center font-bold">
           {selectedSettings.topic}{' '}
           <span className="text-5xl font-extrabold text-sky-400">Quiz</span>
         </h2>
-        <div className="flex w-fit rounded-full px-8 py-1 border-solid border-[1px] border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950">
-          <p className="font-medium text-zinc-300">
+        <div className="flex w-fit max-md:mx-auto rounded-full px-8 py-1 border-solid border-[1px] border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950">
+          <p className="max-md:text-sm font-medium text-zinc-300">
             Difficult {selectedSettings.difficult}
           </p>
         </div>
