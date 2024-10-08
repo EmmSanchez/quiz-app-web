@@ -67,20 +67,6 @@
 .user {
   font-size: 2rem;
 }
-.restart_button {
-  background-color: #f9c74f;
-  border: none;
-  margin-top: 2rem;
-  font-size: 1.5rem;
-  padding: 0.8rem 1.8rem;
-  border-radius: 0.6rem;
-  cursor: pointer;
-}
-.home_button {
-  margin-top: 2rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
 
 .modal-opened {
   display: block;

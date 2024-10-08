@@ -12,7 +12,7 @@ export function AppContainer() {
     topic: 'JavaScript',
     difficult: 'Easy',
     questions: 5,
-    secondsPerQuestion: 60,
+    secondsPerQuestion: 10,
   });
   const [filteredQuestions, setFilteredQuestions] = useState([]);
 
@@ -26,8 +26,6 @@ export function AppContainer() {
     );
     setFilteredQuestions(newQuestions);
   };
-
-  console.log(filteredQuestions);
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
