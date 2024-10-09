@@ -10,14 +10,13 @@ export function Quiz({
   filteredQuestions,
   handleSubmit,
 }) {
+  const minutes = selectedSettings.minutesPerQuestion * 60;
   const [iterator, setIterator] = useState(0);
   const [rightCounter, setRightCounter] = useState(0);
   const [wrongCounter, setWrongCounter] = useState(0);
   const [isNotChecked, setIsNotChecked] = useState(true);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [countdown, setCountdown] = useState(
-    selectedSettings.secondsPerQuestion
-  );
+  const [countdown, setCountdown] = useState(minutes);
   const [timeTaken, setTimeTaken] = useState(0);
   const timerId = useRef();
 
@@ -74,7 +73,7 @@ export function Quiz({
 
   useEffect(() => {
     setIsNotChecked(true);
-    setCountdown(selectedSettings.secondsPerQuestion);
+    setCountdown(minutes);
   }, [iterator]);
 
   // Restart
@@ -84,7 +83,7 @@ export function Quiz({
     setWrongCounter(0);
     setIsNotChecked(true);
     setSelectedAnswer(null);
-    setCountdown(selectedSettings.secondsPerQuestion);
+    setCountdown(minutes);
     setIsFinished(false);
     setTimeTaken(0);
 
@@ -142,6 +141,7 @@ export function Quiz({
           handleCheckAnswer={handleCheckAnswer}
           handleNextQuestion={handleNextQuestion}
           isNotChecked={isNotChecked}
+          minutes={minutes}
         />
       )}
     </div>

@@ -15,6 +15,7 @@ export function Question({
   handleCheckAnswer,
   handleNextQuestion,
   isNotChecked,
+  minutes,
 }) {
   const codeString =
     "const fruits = ['apple', 'banana'];\nfruits.push('orange')\nfruits.push('orange')\nfruits.push('orange')\nfruits.push('orange')\nfruits.push('orange')";
@@ -28,12 +29,14 @@ export function Question({
             <p className="max-md:text-sm text-lg font-bold text-[#ffff3f]">
               Question {iterator + 1}/{selectedSettings.questions}
             </p>
-            <div className="flex items-center gap-2 rounded-full">
-              <TimerIcon className="max-md:size-4 text-zinc-300" />
-              <p className="max-md:text-sm text-lg font-medium tracking-wider text-zinc-300">
-                {formatTime(countdown)}
-              </p>
-            </div>
+            {minutes > 0 && (
+              <div className="flex items-center gap-2 rounded-full">
+                <TimerIcon className="max-md:size-4 text-zinc-300" />
+                <p className="max-md:text-sm text-lg font-medium tracking-wider text-zinc-300">
+                  {formatTime(countdown)}
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="flex flex-grow flex-col gap-4 rounded-md">

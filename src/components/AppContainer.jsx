@@ -12,7 +12,7 @@ export function AppContainer() {
     topic: 'JavaScript',
     difficult: 'Easy',
     questions: 5,
-    secondsPerQuestion: 10,
+    minutesPerQuestion: 0,
   });
   const [filteredQuestions, setFilteredQuestions] = useState([]);
 
