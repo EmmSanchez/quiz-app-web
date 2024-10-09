@@ -5,6 +5,8 @@ import {
   ClipboardListIcon,
   CodeIcon,
   PlayIcon,
+  Timer,
+  TimerOff,
 } from '../assets/icons/Icons';
 import { DropdownMenu } from './Dropdown';
 
@@ -16,6 +18,7 @@ export function Login({ handleSubmit, selectedSettings, setSelectedSettings }) {
   const dropdownOptions1 = ['JavaScript', 'Python', 'Rust'];
   const dropdownOptions2 = ['Easy', 'Medium', 'Hard'];
   const dropdownOptions3 = [5, 10, 15, 20];
+  const dropdownOptions4 = [0, 1, 2, 5, 10, 20, 30, 60];
 
   useEffect(() => {
     if (!activeDropdown) return setIsButtonDisabled(false);
@@ -36,7 +39,7 @@ export function Login({ handleSubmit, selectedSettings, setSelectedSettings }) {
         </p>
 
         <section className="flex flex-col items-center w-auto mt-6 sm:mt-12 gap-4 max-md:px-4">
-          <div className="flex z-10 flex-wrap w-full justify-center gap-4">
+          <div className="flex z-10 flex-wrap w-full justify-center items-center gap-4">
             <DropdownMenu
               options={dropdownOptions1}
               title={selectedSettings.topic}
@@ -67,9 +70,26 @@ export function Login({ handleSubmit, selectedSettings, setSelectedSettings }) {
             >
               <ClipboardListIcon className="size-5" />
             </DropdownMenu>
+
+            <DropdownMenu
+              options={dropdownOptions4}
+              title={selectedSettings.minutesPerQuestion}
+              id="4"
+              activeDropdown={activeDropdown}
+              setActiveDropdown={setActiveDropdown}
+              setSelectedSettings={setSelectedSettings}
+            >
+              {!selectedSettings.minutesPerQuestion ? (
+                <TimerOff className="size-5" />
+              ) : (
+                <Timer className="size-5" />
+              )}
+            </DropdownMenu>
           </div>
 
-          <div className="flex w-[95%] mt-4 ml-3 shadow-[-8px_8px_#fcd34d] rounded-md">
+          <div
+            className={`flex w-[95%] mt-1 ml-3 shadow-[-8px_8px_#fcd34d] rounded-md transition ${isButtonDisabled ? 'brightness-50' : ''}`}
+          >
             <button
               disabled={isButtonDisabled}
               onClick={handleSubmit}
