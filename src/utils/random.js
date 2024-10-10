@@ -2,7 +2,7 @@
 const randomNumberBetween = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
-// GET LISTO OF UNIQUE NUMBERS
+// GET LIST OF UNIQUE NUMBERS
 const generateUniqueRandomNumbers = (min, max, count) => {
   if (count > max - min + 1)
     throw Error(

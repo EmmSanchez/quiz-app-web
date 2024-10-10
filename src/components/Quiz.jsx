@@ -18,9 +18,17 @@ export function Quiz({
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [countdown, setCountdown] = useState(minutes);
   const [timeTaken, setTimeTaken] = useState(0);
-  const timerId = useRef();
-
   const [isFinished, setIsFinished] = useState(false);
+  const [isTimeEnabled, setIsTimeEnabled] = useState(false);
+  useEffect(() => {
+    if (selectedSettings.minutesPerQuestion === 0) {
+      setIsTimeEnabled(false);
+    } else {
+      setIsTimeEnabled(true);
+    }
+  }, [selectedSettings.minutesPerQuestion]);
+
+  const timerId = useRef();
 
   // TIMER
   useEffect(() => {
@@ -38,6 +46,8 @@ export function Quiz({
 
   // WHEN TIME IS OVER
   useEffect(() => {
+    if (!isTimeEnabled) return;
+
     if (countdown <= 0) {
       setCountdown(0);
       if (isNotChecked) {
@@ -62,7 +72,7 @@ export function Quiz({
     const choiced = res;
     setSelectedAnswer(choiced);
 
-    if (filteredQuestions[iterator].respuesta_correcta === choiced) {
+    if (filteredQuestions[iterator].correct_option === choiced) {
       setRightCounter((prev) => prev + 1);
     } else {
       setWrongCounter((prev) => prev + 1);

@@ -3,8 +3,7 @@ import { Quiz } from './Quiz';
 import { Login } from './Login';
 import { NavBar } from './NavBar';
 import { Footer } from './Footer';
-import { getRandomQuestions } from '../utils/random';
-import questions from '../data/data.json';
+// import questions from '../data/data.json';
 
 export function AppContainer() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -16,15 +15,20 @@ export function AppContainer() {
   });
   const [filteredQuestions, setFilteredQuestions] = useState([]);
 
-  const handleSubmit = () => {
-    setIsSubmitted(true);
-    const newQuestions = getRandomQuestions(
-      0,
-      questions.length - 1,
-      selectedSettings.questions,
-      questions
-    );
-    setFilteredQuestions(newQuestions);
+  const handleSubmit = async () => {
+    const { topic, difficult, questions } = selectedSettings;
+    try {
+      const res = await fetch(
+        `http://localhost:3000/questions?topic=${topic.toLowerCase()}&difficult=${difficult.toLowerCase()}&quantity=${questions.toString()}`
+      );
+
+      const fetchedQuestions = await res.json();
+
+      setFilteredQuestions(fetchedQuestions);
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

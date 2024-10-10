@@ -17,9 +17,6 @@ export function Question({
   isNotChecked,
   minutes,
 }) {
-  const codeString =
-    "const fruits = ['apple', 'banana'];\nfruits.push('orange')\nfruits.push('orange')\nfruits.push('orange')\nfruits.push('orange')\nfruits.push('orange')";
-
   return (
     <>
       <div className="flex max-md:flex-col flex-row justify-center w-full h-full px-6 md:py-4 gap-4 md:gap-10">
@@ -41,11 +38,11 @@ export function Question({
 
           <div className="flex flex-grow flex-col gap-4 rounded-md">
             <p className="max-md:text-sm text-lg font-medium pr-1 text-zinc-100">
-              {filteredQuestions[iterator].pregunta}
+              {filteredQuestions[iterator].question_text}
             </p>
 
             {/* CODE */}
-            {!filteredQuestions[iterator].code && (
+            {filteredQuestions[iterator].code_text && (
               <div className="flex-grow overflow-auto max-h-40 max-w-full">
                 <SyntaxHighlighter
                   language="javascript"
@@ -53,7 +50,7 @@ export function Question({
                   customStyle={{ margin: 0, height: '100%' }}
                   className="max-md:text-[10px] text-xs"
                 >
-                  {codeString}
+                  {filteredQuestions[iterator].code_text}
                 </SyntaxHighlighter>
               </div>
             )}
@@ -74,13 +71,13 @@ export function Question({
         {/* right column */}
         <div className="flex flex-col flex-1 w-full max-md:gap-3 gap-4">
           <div className="flex flex-col max-md:gap-2 gap-4">
-            {filteredQuestions[iterator].respuestas.map((res, index) => {
+            {filteredQuestions[iterator].options.map((res, index) => {
               return (
                 <div key={index}>
                   <button
                     disabled={!isNotChecked}
-                    className={`choice ${!isNotChecked ? (res === filteredQuestions[iterator].respuesta_correcta ? 'choice-disabled pointer-events-none bg-zinc-600' : 'choice-disabled pointer-events-none') : ''} ${selectedAnswer ? (selectedAnswer === res && selectedAnswer === filteredQuestions[iterator].respuesta_correcta ? 'right_answer' : selectedAnswer === res ? 'wrong_answer' : '') : ''} ${!isNotChecked ? 'choice-disabled' : ''} ${selectedAnswer ? (selectedAnswer === res && selectedAnswer === filteredQuestions[iterator].respuesta_correcta ? 'right_answer' : res === filteredQuestions[iterator].respuesta_correcta ? 'right_answer' : '') : ''}`}
-                    onClick={() => handleCheckAnswer(res)}
+                    className={`choice ${!isNotChecked ? (index + 1 === filteredQuestions[iterator].correct_option ? 'choice-disabled pointer-events-none bg-zinc-600' : 'choice-disabled pointer-events-none') : ''} ${selectedAnswer ? (selectedAnswer === index + 1 && selectedAnswer === filteredQuestions[iterator].correct_option ? 'right_answer' : selectedAnswer === index + 1 ? 'wrong_answer' : '') : ''} ${!isNotChecked ? 'choice-disabled' : ''} ${selectedAnswer ? (selectedAnswer === index + 1 && selectedAnswer === filteredQuestions[iterator].correct_option ? 'right_answer' : index + 1 === filteredQuestions[iterator].correct_option ? 'right_answer' : '') : ''}`}
+                    onClick={() => handleCheckAnswer(index + 1)}
                   >
                     {res}
                   </button>
