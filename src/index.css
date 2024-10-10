@@ -87,6 +87,7 @@
 
 .custom-scroll::-webkit-scrollbar {
   width: 4px;
+  scroll-behavior: smooth;
 }
 .custom-scroll::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0); /* Color del scroll */
@@ -100,6 +101,7 @@
 }
 /* Firefox */
 .custom-scroll {
+  scroll-behavior: smooth;
   scrollbar-width: thin; /* Scroll más delgado */
   scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0); /* thumb y track */
 }
