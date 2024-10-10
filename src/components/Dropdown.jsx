@@ -115,7 +115,7 @@ export function DropdownMenu({
         <button
           ref={buttonRef}
           onClick={(e) => toggleDropdown(e, id)}
-          className={`flex justify-center items-center gap-2 w-40 ${id === '4' ? 'w-full' : ''} border-solid border-[1px] border-zinc-700 px-4 py-2 rounded-md transition-all ease-out hover:bg-zinc-700 ${activeDropdown === id ? 'pointer-events-none' : 'pointer-events-auto'}`}
+          className={`flex justify-center items-center gap-2 w-40 ${id === '4' ? 'md:w-full' : ''} border-solid border-[1px] border-zinc-700 px-4 py-2 rounded-md transition-all ease-out hover:bg-zinc-700 ${activeDropdown === id ? 'pointer-events-none' : 'pointer-events-auto'}`}
         >
           {children}
 
