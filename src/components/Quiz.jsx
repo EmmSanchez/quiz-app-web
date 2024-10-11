@@ -87,7 +87,8 @@ export function Quiz({
   }, [iterator]);
 
   // Restart
-  const handleRestart = () => {
+  const handleRestart = async () => {
+    await handleSubmit();
     setIterator(0);
     setRightCounter(0);
     setWrongCounter(0);
@@ -96,8 +97,6 @@ export function Quiz({
     setCountdown(minutes);
     setIsFinished(false);
     setTimeTaken(0);
-
-    handleSubmit();
   };
 
   // Return to Login

@@ -3,6 +3,7 @@ import { Quiz } from './Quiz';
 import { Login } from './Login';
 import { NavBar } from './NavBar';
 import { Footer } from './Footer';
+import { QuestionController } from '../controllers/questions.js';
 // import questions from '../data/data.json';
 
 export function AppContainer() {
@@ -16,15 +17,19 @@ export function AppContainer() {
   const [filteredQuestions, setFilteredQuestions] = useState([]);
 
   const handleSubmit = async () => {
-    const { topic, difficult, questions } = selectedSettings;
+    const { topic, difficult, questions: quantity } = selectedSettings;
+    const lowerCaseTopic = topic.toLowerCase();
+    const lowerCaseDifficult = difficult.toLowerCase();
     try {
-      const res = await fetch(
-        `http://localhost:3000/questions?topic=${topic.toLowerCase()}&difficult=${difficult.toLowerCase()}&quantity=${questions.toString()}`
-      );
+      const questions = await QuestionController.getQuestions({
+        lowerCaseTopic,
+        lowerCaseDifficult,
+        quantity,
+      });
 
-      const fetchedQuestions = await res.json();
+      console.log(questions);
 
-      setFilteredQuestions(fetchedQuestions);
+      setFilteredQuestions(questions);
       setIsSubmitted(true);
     } catch (error) {
       console.error(error);
