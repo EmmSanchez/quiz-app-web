@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKet = import.meta.env.VITE_SUPABASE_KEY;
-export const supabase = await createClient(supabaseUrl, supabaseKet);
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+export const supabase = await createClient(supabaseUrl, supabaseKey);
 
 export class QuestionModel {
   static async getQuestions({ topic, difficult }) {
