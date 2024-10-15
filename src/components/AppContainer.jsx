@@ -3,7 +3,7 @@ import { Quiz } from './Quiz';
 import { Login } from './Login';
 import { NavBar } from './NavBar';
 import { Footer } from './Footer';
-import { QuestionController } from '../controllers/questions.js';
+// import { QuestionController } from '../controllers/questions.js';
 // import questions from '../data/data.json';
 
 export function AppContainer() {
@@ -21,12 +21,11 @@ export function AppContainer() {
     const lowerCaseTopic = topic.toLowerCase();
     const lowerCaseDifficult = difficult.toLowerCase();
     try {
-      const questions = await QuestionController.getQuestions({
-        lowerCaseTopic,
-        lowerCaseDifficult,
-        quantity,
-      });
+      const data = await fetch(
+        `https://quizapi-production-4832.up.railway.app/questions?topic=${lowerCaseTopic}&difficult=${lowerCaseDifficult}&quantity=${quantity}`
+      );
 
+      const questions = await data.json();
       console.log(questions);
 
       setFilteredQuestions(questions);
