@@ -1,8 +1,55 @@
-# React + Vite
+# ❓ Quode — Programming Quiz App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Quode Main Preview](/public/images/quizzapp_main.webp)
 
-Currently, two official plugins are available:
+**Quode** is an interactive quiz app designed to test and sharpen your programming knowledge. Choose questions by language and difficulty level to challenge your logic, syntax, and problem-solving skills.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+> 🔗 [Try it live](https://quiz-app-web-plum.vercel.app/)
+
+---
+
+## 🎯 Features
+
+- Answer technical questions by topic and level
+- Clean, responsive UI with real-time feedback
+- Backend with user score tracking and API endpoints
+- Randomized question selection from a dynamic database
+- Language-agnostic architecture (JavaScript, Python, etc.)
+
+---
+
+## 🧪 Technologies Used
+
+**Frontend:**
+
+- ⚡ [Vite](https://vitejs.dev/)
+- ⚛️ [React](https://reactjs.org/)
+- 💨 [Tailwind CSS](https://tailwindcss.com/)
+
+**Backend & Infrastructure:**
+
+- 🚂 [Express.js](https://expressjs.com/)
+- 🐘 [PostgreSQL](https://www.postgresql.org/)
+
+---
+
+![Quode Mockup](/public/images/quizzapp_mockup.webp)
+
+## 📂 Repositories
+
+- **Frontend**: [quiz-app-web (GitHub)](https://github.com/EmmSanchez/quiz-app-web)
+- **Backend**: [quiz_api (GitHub)](https://github.com/EmmSanchez/quiz_api)
+
+---
+
+## 🚀 Project Status
+
+✅ **Completed** — Quode is live and available for use.
+
+---
+
+## 📬 Contact
+
+Have suggestions, feedback, or bug reports? Feel free to open an issue on GitHub.
+
+---
